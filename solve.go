@@ -2,6 +2,8 @@ package main
 
 import (
 	"log"
+
+	"github.com/schollz/progressbar/v3"
 )
 
 func isIn(a int, list [9]int) bool {
@@ -75,9 +77,13 @@ func solve(tab [9][9]int) [9][9]int {
 	var possible [9][9][]int
 	//save the coord for each case we can change
 	pos := initPos(tab)
-	log.Printf("%d cases to solve", len(pos))
+	log.Printf("%d cases to solve :", len(pos))
 	var available bool
 
+	//declare the progress bar to the number of cases to solve
+	bar := progressbar.Default(int64(len(pos)))
+
+	cycle := 0
 	i := 0
 	//For each case of the sudoku that we can change
 	for i < (len(pos)) {
@@ -106,6 +112,11 @@ func solve(tab [9][9]int) [9][9]int {
 			//Them use the next available and go back in the loop
 			output[pos[i-1].x][pos[i-1].y] = possible[pos[i-1].x][pos[i-1].y][0]
 		}
+		cycle++
+
+		//update the progress bar to the case we are solving
+		bar.Set(i)
 	}
+	log.Printf("Cycles required : %d ", cycle)
 	return output
 }

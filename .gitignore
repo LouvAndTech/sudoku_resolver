@@ -2,3 +2,4 @@
 output/*
 input/*
 makefile
+sudoku-resolver
