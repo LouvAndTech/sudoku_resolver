@@ -75,9 +75,9 @@ func main() {
 	fmt.Println("Starting !\n")
 	start := time.Now()
 
-	//Get the sudoku
+	//Get the sudoku from the arg or a user input
 	var path string
-	if len(os.Args) > 0 {
+	if len(os.Args) != 2 {
 		fmt.Print("Enter the path of the sudoku file : ")
 		fmt.Scanln(&path)
 	} else {
@@ -98,6 +98,9 @@ func main() {
 	fmt.Println("\nSOLUTION :")
 	fmt.Print(printTab(solved))
 
+	//Print the time and the end of the programm
 	fmt.Printf("\nSolving time : %s!\n", time.Since(start))
+	fmt.Println("Press the Enter Key to quit")
+	fmt.Scanln()
 	fmt.Println("Closing.\n")
 }
